@@ -1,0 +1,26 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form>
+  <md-dialog-content style = "position:relative; width:100%; height:100%;background-color:#3F51B5;">
+           <div class="md-center">
+          <i class="material-icons md-48 md-light">account_circle</i>
+    </div>
+         <div class="login-header">
+          <h2>Admin Panel Login</h2>
+        </div>
+      
+         <md-input-container md-theme="docs-dark" class = "login-form">
+               <label>Login</label>
+               <input ng-model="login">
+           </md-input-container>
+      
+            <md-input-container class = "login-form">
+               <label>Password</label>
+               <input ng-model="password"> 
+           </md-input-container>  
+      
+       <div style = "text-align: right;">
+         <md-button class="md-raised" ng-click = "checkLogin()">Login</md-button>
+      </div>
+  </md-dialog-content>
+  </form>
+</md-dialog>

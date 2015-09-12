@@ -1,0 +1,47 @@
+<div id="map" ng-init="getData()">
+    
+	<leaflet center="center" markers="markers" defaults="defaults" controls="controls" id="map">
+	</leaflet>
+
+    
+   <div class="report-card" ng-show="userType == 'Admin' && isEmpty(selectedMarker)">
+          <div class="card">
+            <div class="card-image">
+              <img class="materialboxed responsive-img" src="{{selectedMarker.image}}">
+              <span class="card-title">
+                  <p><i class="fa fa-bug"></i></p>
+                  <span class="middle-tile" style = "text-alignment: right;"> 
+					<h1>{{selectedMarker.status}}</h1> 
+                  </span>              
+                </span>
+            </div>
+             <div class="card-content" style = "position: relative; height:100%; width:100%;">
+                 <div class="row">
+                        <div class="col s6"><p class="report-title"> Coordinates:</p></div>
+                         <div class="col s6"><p class="pull-quote">{{selectedMarker.lat | number: 3}} / {{selectedMarker.lng | number: 3}}</p></div>
+                    </div>
+                   <div class="row">
+                        <div class="col s12"><p class="report-title"> LSID:</p></div>
+                         <div class="col s12"><p class="pull-quote">{{selectedMarker.lsid}}</p></div>
+                    </div>
+                  <div class="row">
+                        <div class="col s4"><p class="report-title">  Abundance:</p></div>
+                         <div class="col s4"><p class="pull-quote">{{selectedMarker.abundance}}</p></div>
+                      <div class="col s4"></div>
+                    </div>
+                   <div class="row">
+                        <div class="col s4"><p class="pull-quote"> Precision:</p></div>
+                         <div class="col s4"><p class="pull-quote">{{selectedMarker.precision}}</p></div>
+                      <div class="col s4"></div>
+                    </div>
+                 
+                 <h4>Comment: </h4>
+                 <p class="pull-quote">{{selectedMarker.comment}}</p>  
+            </div>
+             <div class="card-action">
+              <a href="#">This is a link</a>
+                 <a href="#">This is a link</a>
+            </div>
+      </div>
+
+</div>

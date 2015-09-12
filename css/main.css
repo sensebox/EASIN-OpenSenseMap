@@ -1,0 +1,274 @@
+/* Space out content a bit */
+a { 
+    cursor: pointer; 
+}
+
+body {
+  padding-top: 150px;
+  padding-bottom: 20px;
+}
+
+html,
+body {
+    top: 0;
+  left: 0;
+  bottom: 0;
+  padding-left: 0;
+   font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.middle-tile{
+	letter-spacing: 0.04em;
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	font-family: "Lucida Grande", "Segoe UI", "Arial", sans-serif;
+	text-align: center;
+    font-style: normal;
+    display: block;
+    color: #fafafa;
+}
+
+.report-title{
+    font-style:oblique;
+    font-size: 1.5em;
+	margin: 0.3em;
+}
+.pull-quote{
+	font-size: 1.5em;
+	margin: 0.3em;
+}
+
+#zundung {
+  width: 100%;
+  line-height: 2.5;
+}
+
+.report-card{
+    position: absolute;
+    width: 30%;
+    top: 8%;
+    right: 1%;
+    padding: 0;
+    height:50px;
+}
+
+.round{
+    border-radius: 10px;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding-left: 0;
+}
+
+#map_main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+#downloadlink {
+  color: white;
+  text-decoration: none;
+}
+
+#downloadlink:hover {
+  color: white;
+}
+
+.leaflet-top {
+  top: 0px;
+}
+
+
+/* Icon + Name */
+
+#brand_with_logo img, 
+#brand_with_logo h3 {
+  display:inline-flex;
+}
+
+
+
+
+.app-info {
+  font-size: 14px;
+}
+
+.app-info .fa-heart {
+  color: lightcoral;
+}
+
+#app_info_button {
+  display: block;
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 25px;
+  width: 25px;
+  height: 25px;
+  color: #fdfdfd;
+  background-color: #707070;
+  text-align: center;
+  border-radius: 15px;
+}
+
+#app_info_button:hover {
+  background-color: #969696;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.ngdialog.ngdialog-theme-custom {
+  padding-top: 125px;
+  padding-bottom: 125px;
+}
+
+.ngdialog.ngdialog-theme-custom .ngdialog-overlay {
+  background: rgba(255,255,255,.5);
+}
+
+.ngdialog.ngdialog-theme-custom .ngdialog-content {
+  background: rgba(255,255,255,.9);
+  padding: 1.8em 2em;
+  width: 440px;
+  border-radius: 0;
+}
+
+.ngdialog.ngdialog-theme-custom .ngdialog-message h2 {
+  font-size: 26px;
+  font-family: 'Montserrat', 'Helvetica', Arial, sans-serif;
+  line-height: 30px;
+  margin-bottom: 20px;
+}
+
+.ngdialog.ngdialog-theme-custom .ngdialog-message {
+  font-size: 16px;
+  font-family: 'Source Sans Pro';
+  line-height: 22px;
+}
+
+.ngdialog.ngdialog-theme-custom .ngdialog-message ul {
+  padding: 0 0 5px 35px;
+}
+
+.ngdialog.ngdialog-theme-custom .ngdialog-button.ngdialog-button-primary {
+  background: #27ae60;
+  border-radius: 0;
+}
+
+.xxxl {
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.fill {
+  width: 100%;
+  height: 480px;
+}
+
+.fullsize {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.register {
+  margin-top: 20px;
+}
+
+.editable-empty {
+  font-style: normal;
+  color: black;
+}
+
+.editable-empty:hover,
+.editable-empty:focus {
+  font-style: normal;
+  color: black;
+}
+
+/* MAP PAGE
+-------------------------------------------------- */
+
+/* Custom page header */
+
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Make the masthead heading the same height as the navigation */
+
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+
+/* Customize container */
+
+.container {
+  min-width: 100%;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+
+/* Icons   */
+.material-icons.md-48 { font-size: 100px; }
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.md-center { text-align: center; }
+
+.login-header h2{
+   font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 44px;
+  line-height: 1.4;
+   text-align: center;
+    margin-bottom:0;
+    color:white;
+}
+
+.login-form label{
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 1.4;
+    margin-bottom:0;
+    color:white;
+}
+
+.login-form input{
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.4;
+    margin-bottom:0;
+    color:white;
+}
