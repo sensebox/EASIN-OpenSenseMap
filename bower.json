@@ -1,0 +1,27 @@
+{
+  "name": "EASIN",
+  "version": "0.0.0",
+  "authors": [
+    "AlexIsHappy <alexishappy@yandex.ru>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-leaflet": "~0.8.7",
+    "angular-route": "~1.4.5",
+    "angular-material": "~0.10.1",
+    "angular-resource": "~1.4.5",
+    "font-awesome": "~4.4.0",
+    "Leaflet.awesome-markers": "~2.0.2",
+    "angular-materialize": "*",
+    "jquery": "~2.1.4",
+    "material-design-lite": "~1.0.4"
+  }
+}
