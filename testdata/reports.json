@@ -1,3 +1,23 @@
+[{
+    "type":"Feature",
+    "geometry":{"type":"Point",
+                "coordinates":[51.966342,7.6214499],
+               },
+    "properties":{
+        "ICCID":"1234567890123456789",
+        "OAUTH-ID":"abc@gmail.com",
+        "LSID":"urn:lsid:alien.jrc.ec.europa.eu:species:R02004:4.6",
+        "Abundance":"15",
+        "Precision":"Precise",
+        "Comment":"whatever I find worth adding",
+        "Status":"submitted",
+        "Image":"images/img1.jpg"
+    }
+}]
+
+
+
+
 /* Schema of the JSON object --------
 var reportSchema = new Schema({
   type: {

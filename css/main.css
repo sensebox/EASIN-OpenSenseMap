@@ -246,7 +246,7 @@ a:hover {
    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
   font-weight: 300;
-  font-size: 44px;
+  font-size: 35px;
   line-height: 1.4;
    text-align: center;
     margin-bottom:0;
@@ -271,4 +271,21 @@ a:hover {
   line-height: 1.4;
     margin-bottom:0;
     color:white;
+}
+
+
+
+
+
+/* Morph button */
+.thecontent {
+    width: 400px;
+    height: 400px;
+    display: block;
+    color: white;
+    text-align: center;
+    background: #428bca;
+}
+.closeit {
+    cursor: pointer;
 }

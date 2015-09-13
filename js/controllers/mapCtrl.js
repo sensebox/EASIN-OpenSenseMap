@@ -4,6 +4,30 @@ angular.module('easinApp')
            $scope.markers = [];
            $scope.selectedMarker = {};
            
+           //Test data
+        var data =  [{
+    "type":"Feature",
+    "geometry":{"type":"Point",
+                "coordinates":[51.966342,7.6214499],
+               },
+    "properties":{
+        "ICCID":"1234567890123456789",
+        "OAUTHID":"abc@gmail.com",
+        "LSID":"urn:lsid:alien.jrc.ec.europa.eu:species:R02004:4.6",
+        "Abundance":"15",
+        "Precision":"Precise",
+        "Comment":"whatever I find worth adding",
+        "Status":"submitted",
+        "Image":"images/img1.jpg"
+    }
+}];
+
+
+
+           
+           
+           
+           
            // Markers for the different states of submission
            var icons = {
                 submitted: {
@@ -34,7 +58,47 @@ angular.module('easinApp')
            
         // Fetch the data on the initial start of the application
            $scope.getData = function(){
-               API.getReports()
+              for(var i = 0; i < data.length; i++){
+                  var tempMarker = {};
+                  //Image:
+                  tempMarker.image = data[i].properties.Image;
+                  
+                  
+                  // Meta info (Invisible for public)
+                   tempMarker.iccid = data[i].properties.ICCID;
+                   tempMarker.oauth = data[i].properties.OAUTHID;
+                  
+                  //Visible for public
+                   tempMarker.lsid = data[i].properties.LSID;
+                  
+                  // General info
+                   tempMarker.abundance = data[i].properties.Abundance;
+                   tempMarker.precision = data[i].properties.Precision;
+                   tempMarker.comment = data[i].properties.Comment;
+                  
+                  // Coordinates
+                   tempMarker.lat = data[i].geometry.coordinates[0];
+                   tempMarker.lng = data[i].geometry.coordinates[1];
+                  
+                  console.log(tempMarker);
+                  if (data[i].properties.Status == "submitted"){
+                     tempMarker.icon = icons.submitted;
+                     tempMarker.status = "Submitted";                    
+                  } else if (data[i].properties.Status == "prevalidated"){
+                      tempMarker.icon = icons.prevalid;
+                      tempMarker.status = "Prevalidated";
+                  } else if (data[i].properties.Status == "validated"){
+                      tempMarker.icon = icons.valid;
+                      tempMarker.status = "Validated";
+                  } else {
+                      tempMarker.icon = icons.missing;
+                      tempMarker.status = "missing";
+                  }
+                   $scope.markers.push(tempMarker);
+                       console.log($scope.markers);
+                   }
+               
+              /*API.getReports()
                    .success(function (response) {
                    
                    for(var i = 0; i < response.data.length; i++){
@@ -78,7 +142,7 @@ angular.module('easinApp')
                })
                    .error(function (error) {
                    console.log(error);
-               });
+               });*/
            };
            
            
