@@ -16,7 +16,7 @@ angular.module('easinApp')
         "LSID":"urn:lsid:alien.jrc.ec.europa.eu:species:R02004:4.6",
         "Abundance":"15",
         "Precision":"Precise",
-        "Comment":"whatever I find worth adding",
+        "Comment":"whatever I find worth adding aljdgn aj aowjh gpoawh poawhrog haprw hgpwhr gpiahwp ghawpghapwh g",
         "Status":"submitted",
         "Image":"images/img1.jpg"
     }

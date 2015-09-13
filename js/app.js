@@ -38,19 +38,6 @@ angular.module('easinApp',['ngMaterial','ngRoute','leaflet-directive','ngResourc
   }]);
 function DialogController($scope,$rootScope,  $mdDialog) {
     $scope.adminCode = null;
-    
-    var tpl = '<div class="thecontent">' +
-                '<h1> some content </h1>' +
-                '<span class="closeit"> close </span>' +
-              '</div>';
-    
-    $scope.settings = {
-        closeEl: '.closeit',
-        modal: {
-            template: tpl,
-        }
-    };
-    
     $scope.checkLogin = function() {
         /* This step should be reworked. Potentially, we need one more collection with admin info.
             For now, login - admin and password - 123    */

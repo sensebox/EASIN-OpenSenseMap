@@ -1,8 +1,12 @@
-/* Space out content a bit */
+/* General */
 a { 
     cursor: pointer; 
 }
 
+.title-info img{
+     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) );
+}
+/* Space out content a bit */
 body {
   padding-top: 150px;
   padding-bottom: 20px;
@@ -15,7 +19,7 @@ body {
   bottom: 0;
   padding-left: 0;
    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
-  font-style: normal;
+  font-style:normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 1.4;
@@ -28,11 +32,19 @@ body {
 .middle-tile{
 	letter-spacing: 0.04em;
 	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-	font-family: "Lucida Grande", "Segoe UI", "Arial", sans-serif;
-	text-align: center;
-    font-style: normal;
-    display: block;
+	font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;;
+	text-align: left;
+    font-style:normal;
+    display: flex;
     color: #fafafa;
+}
+
+.middle-tile h1{
+    letter-spacing: 0.04em;
+	font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;;
+    font-style:normal;
+    font-weight: 400;
+    text-align: left;
 }
 
 .report-title{
@@ -52,11 +64,12 @@ body {
 
 .report-card{
     position: absolute;
-    width: 30%;
+    width: 25%;
     top: 8%;
     right: 1%;
     padding: 0;
     height:50px;
+    background-color: #C8E6C9;
 }
 
 .round{
@@ -276,7 +289,6 @@ a:hover {
 
 
 
-
 /* Morph button */
 .thecontent {
     width: 400px;
@@ -288,4 +300,103 @@ a:hover {
 }
 .closeit {
     cursor: pointer;
+}
+
+
+
+/* Tiles with information inside a card */
+.tile-coord{
+    display: flex;
+}
+
+.tile-coord .tile-coord-info{
+    display: block;
+    text-align: left;
+}
+
+.tile-coord .tile-coord-icon{
+    position:absolute;
+    right: 10%;
+}
+
+.tile-coord .tile-coord-info .coord{
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.tile-coord .tile-coord-info .tile-header{
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 10px;
+}
+
+.tile-abunc-prec{
+    display: flex;
+    position: relative;
+    bottom:30%;
+}
+
+.tile-abunc-prec .tile-abundance{
+    display: block;
+    text-align: center;
+}
+
+.tile-abunc-prec .tile-abundance .tile-header {
+   font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.tile-abunc-prec .tile-abundance .tile-info {
+ font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+}
+
+
+.tile-abunc-prec .tile-precision{
+  display: block;
+    text-align: center;
+        position:absolute;
+    right:0;
+}
+
+.tile-abunc-prec .tile-precision .tile-header{
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.tile-abunc-prec .tile-precision .tile-info{
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+}
+
+.tile-comment{
+    display: block;
+    background-color:white; overflow:auto;
+}
+
+.tile-comment .tile-header{
+    text-align: justify;
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+}
+.tile-comment .tile-info{
+    text-align: center;
+      text-align: justify;
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
 }
