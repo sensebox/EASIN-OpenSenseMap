@@ -1,8 +1,8 @@
 angular.module('easinApp')
-       .controller('mapCtrl',['$scope','$http','API', function($scope,$http,API){
+       .controller('mapCtrl',['$scope','$rootScope','$http','API','$mdDialog', function($scope,$rootScope, $http, API, $mdDialog){
                 
            $scope.markers = [];
-           $scope.selectedMarker = {};
+           $rootScope.selectedMarker = {};
            
            //Test data
         var data =  [{
@@ -16,17 +16,27 @@ angular.module('easinApp')
         "LSID":"urn:lsid:alien.jrc.ec.europa.eu:species:R02004:4.6",
         "Abundance":"15",
         "Precision":"Precise",
-        "Comment":"whatever I find worth adding aljdgn aj aowjh gpoawh poawhrog haprw hgpwhr gpiahwp ghawpghapwh g",
+        "Comment":"whatever I find worth adding",
         "Status":"submitted",
-        "Image":"images/img1.jpg"
+        "Image":"images/img3.jpg"
+    }
+},
+                    {
+    "type":"Feature",
+    "geometry":{"type":"Point",
+                "coordinates":[53.966342,8.6214499],
+               },
+    "properties":{
+        "ICCID":"2948592846928745",
+        "OAUTHID":"cba@gmail.com",
+        "LSID":"urn:lsid:alien.jrc.ec.europa.eu:species:R02004:4.6",
+        "Abundance":"35",
+        "Precision":"Approximate",
+        "Comment":"whatever I find worth adding",
+        "Status":"prevalidated",
+        "Image":"images/img2.jpg"
     }
 }];
-
-
-
-           
-           
-           
            
            // Markers for the different states of submission
            var icons = {
@@ -149,7 +159,7 @@ angular.module('easinApp')
            
            // Listen for a click on markers
         $scope.$on('leafletDirectiveMarker.click', function(e, args) {
-           $scope.selectedMarker = args.model;
+           $rootScope.selectedMarker = args.model;
             $scope.center.lat = $scope.selectedMarker.lat;
             $scope.center.lng = $scope.selectedMarker.lng;
             $scope.center.zoom = 6;
@@ -185,4 +195,35 @@ angular.module('easinApp')
            });
            
            
+        // Edit Modal Window
+        $scope.startEdit = function(ev) {
+           $mdDialog.show({
+            controller: editController,
+            templateUrl: 'views/edit_modal.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true
+             });
+           };
+           
        }]);
+
+
+function editController($scope, $rootScope, API, $mdDialog) {
+    $scope.selectedMarker = $rootScope.selectedMarker;
+    
+    
+    $scope.saveEditedMarker = function(){
+        API.updateReport()
+                   .success(function (response) {
+                    $mdDialog.hide();
+                   
+                })
+                   .error(function (error) {
+                   console.log(error);
+                   $mdDialog.hide();
+                });
+    };
+    
+    
+  };

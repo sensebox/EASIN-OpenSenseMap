@@ -305,6 +305,9 @@ a:hover {
 
 
 /* Tiles with information inside a card */
+
+
+/* Tile with coordinates */
 .tile-coord{
     display: flex;
 }
@@ -323,16 +326,18 @@ a:hover {
   font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .tile-coord .tile-coord-info .tile-header{
   font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
   font-weight: 300;
-  font-size: 10px;
+  font-size: 15px;
 }
 
+
+/* Tiles with info about Abundance and Precision */
 .tile-abunc-prec{
     display: flex;
     position: relative;
@@ -348,14 +353,14 @@ a:hover {
    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
   font-weight: 300;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .tile-abunc-prec .tile-abundance .tile-info {
  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 28px;
+  font-size: 20px;
 }
 
 
@@ -370,19 +375,21 @@ a:hover {
   font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
   font-weight: 300;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .tile-abunc-prec .tile-precision .tile-info{
     font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 28px;
+  font-size: 20px;
 }
 
+
+/*  Tile with commentaries */
 .tile-comment{
     display: block;
-    background-color:white; overflow:auto;
+    overflow:auto;
 }
 
 .tile-comment .tile-header{
@@ -390,7 +397,7 @@ a:hover {
     font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 28px;
+  font-size: 20px;
 }
 .tile-comment .tile-info{
     text-align: center;
@@ -398,5 +405,86 @@ a:hover {
     font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
   font-weight: 300;
+  font-size: 15px;
+}
+
+
+/*  Tile with LSID code */
+.tile-lsid{
+    display: block;
+    overflow:auto;
+}
+
+.tile-lsid .tile-header{
+    text-align: justify;
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-size: 20px;
+}
+.tile-lsid .tile-info{
+    text-align: center;
+      text-align: justify;
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+
+
+/*  Tile, which is visible only for admins */
+.admin-visible{
+    display: flex;
+    position: relative;
+}
+
+.admin-visible .md-button{
+    position: absolute;
+    right:0;
+    bottom:25%;
+}
+
+.admin-visible .admin-info{
+    display: block;
+    position: relative;
+}
+
+.tile-iccid{
+    display: block;
+}
+
+.tile-iccid .tile-header{
+    text-align: justify;
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+}
+.tile-iccid .tile-info{
+    text-align: center;
+      text-align: justify;
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+.tile-oauthid{
+    display: block;
+}
+.tile-oauthid .tile-header{
+    text-align: justify;
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+}
+.tile-oauthid .tile-info{
+    text-align: center;
+      text-align: justify;
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
 }

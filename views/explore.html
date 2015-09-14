@@ -3,8 +3,7 @@
 	<leaflet center="center" markers="markers" defaults="defaults" controls="controls" id="map">
 	</leaflet>
     
-    <!-- ng-show="userType == 'Admin' && isEmpty(selectedMarker)" -->
-   <div class="report-card">
+   <div class="report-card" ng-show =" isEmpty(selectedMarker)">
           <div class="card" style ="relative">
             <div class="card-image title-info">
               <img class="materialboxed responsive-img" src="{{selectedMarker.image}}">
@@ -35,43 +34,33 @@
                           <p class="tile-info">{{selectedMarker.precision}}</p>
                      </div>
                  </div>
+                 <hr>
                  <div class ="tile-comment">
                          <p class="tile-header">Comment</p>
                           <p class="tile-info" >{{selectedMarker.comment}}</p>
                  </div>
-                 <md-button class="md-fab md-mini md-primary" aria-label="Use Android">
-                     <i class="fa fa-globe"></i>
-        </md-button>
-              <!--  <div class="row">
-                        <div class="col s6"><p class="report-title"> Coordinates:</p></div>
-                         <div class="col s6"><p class="pull-quote">{{selectedMarker.lat | number: 3}} / {{selectedMarker.lng | number: 3}}</p></div>
-                    </div>
-                   <div class="row">
-                        <div class="col s12"><p class="report-title"> LSID:</p></div>
-                         <div class="col s12"><p class="pull-quote">{{selectedMarker.lsid}}</p></div>
-                    </div>
-                  <div class="row">
-                        <div class="col s4"><p class="report-title">  Abundance:</p></div>
-                         <div class="col s4"><p class="pull-quote">{{selectedMarker.abundance}}</p></div>
-                      <div class="col s4"></div>
-                    </div>
-                   <div class="row">
-                        <div class="col s4"><p class="pull-quote"> Precision:</p></div>
-                         <div class="col s4"><p class="pull-quote">{{selectedMarker.precision}}</p></div>
-                      <div class="col s4"></div>
-                    </div>
+                 <hr>
                  
-                 <h4>Comment: </h4>
-                 <p class="pull-quote">{{selectedMarker.comment}}</p>  
+                 <div class ="tile-lsid" ng-hide="userType == 'Admin'">
+                     <p class="tile-header">LSID</p>
+                          <p class="tile-info" >{{selectedMarker.lsid}}</p>
+                 </div>
                  
-                <md-button class="md-fab md-primary md-hue-2" aria-label="Profile">
-                          <i class="fa fa-pencil"></i>
-                 </md-button>
-                 
-            </div>
-             <div class="card-action">
-              <a href="#">This is a link</a>
-                 <a href="#">This is a link</a>
-            </div>  -->
+                 <!-- Part which is visible only for admins -->
+                 <div class = "admin-visible" ng-show="userType == 'Admin'">
+                     <div class="admin-info">
+                         <div class ="tile-iccid">
+                             <p class="tile-header">ICCID</p>
+                             <p class="tile-info" >{{selectedMarker.iccid}}</p>
+                         </div>
+                         <div class ="tile-oauthid">
+                             <p class="tile-header">OAUTH-ID</p>
+                             <p class="tile-info" >{{selectedMarker.oauth}}</p>
+                         </div>
+                     </div>
+                     <md-button class="md-fab md-mini md-primary" style = "background-color:#4CAF50;" ng-click="startEdit()" aria-label="Use Android">
+                        <i class="fa fa-pencil"></i>
+                     </md-button>
+                 </div>
       </div> 
 </div>

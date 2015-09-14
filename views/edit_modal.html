@@ -1,0 +1,57 @@
+<md-dialog>
+  <form>
+      <md-toolbar style = "background-color:#4CAF50;">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Edit Report</span>
+        </h2>
+      </div>
+    </md-toolbar>
+  <md-dialog-content style = "position:relative; width:100%; height:100%;">
+      
+      
+          <div layout="column">
+  <md-content md-theme="docs-dark" layout-padding layout="row" layout-sm="column">
+
+  <md-content layout-padding>
+    <form name="userForm">
+    <div layout layout-sm="column">
+        <md-input-container flex>
+        <label>Status</label>
+        <textarea ng-model="selectedMarker.status" columns="1" md-maxlength="150"></textarea>
+      </md-input-container>
+        </div>
+      <div layout layout-sm="column">
+         <md-input-container flex>
+        <label>Abundance</label>
+        <input ng-model="selectedMarker.abundance">
+      </md-input-container>
+        <md-input-container flex>
+          <label>Precision</label>
+          <input ng-model="selectedMarker.precision">
+        </md-input-container>
+      </div>
+      <div layout layout-sm="column">
+        <md-input-container flex>
+          <label>ICCID</label>
+          <input ng-model="selectedMarker.iccid">
+        </md-input-container>
+        <md-input-container flex>
+          <label>OATH-ID</label>
+          <input ng-model="selectedMarker.oauth">
+        </md-input-container>
+      </div>
+      <md-input-container flex>
+        <label>Comment</label>
+        <textarea ng-model="selectedMarker.comment" columns="1" md-maxlength="150"></textarea>
+      </md-input-container>
+        <md-button class="md-raised md-primary" ng-click = "saveEditedMarker()" style = "width:95%;background-color:#4CAF50;">Save</md-button>
+    </form>
+  </md-content>
+</div>
+      
+      
+      
+  </md-dialog-content>
+  </form>
+</md-dialog>
