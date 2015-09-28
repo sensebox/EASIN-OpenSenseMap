@@ -1,5 +1,8 @@
 'use strict';
 
+
+// Change value of 'Server' so that it points to the address with all the reports
+
 angular.module('easinApp')
 .value('Server', 'http://localhost:80/reports')
 

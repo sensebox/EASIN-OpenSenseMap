@@ -32,6 +32,7 @@ angular.module('easinApp',['ngMaterial','ngRoute','leaflet-directive','ngResourc
       $scope.logOut = function(){
           $rootScope.userType = "Login";
           $rootScope.asAdmin = false;
+          $route.reload();
       };
       
       

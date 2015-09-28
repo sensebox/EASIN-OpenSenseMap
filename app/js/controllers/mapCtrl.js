@@ -67,11 +67,14 @@ angular.module('easinApp')
       };
            
         // Fetch the data on the initial start of the application
-           $scope.getData = function(){
-              for(var i = 0; i < data.length; i++){
+                
+         $scope.getData = function(){
+         
+        /** With the test data */
+            /* for(var i = 0; i < data.length; i++){
                   var tempMarker = {};
                   //Image:
-                  tempMarker.image = data[i].properties.Image;
+                  tempMarker.image = "images/img2.jpg";
                   
                   
                   // Meta info (Invisible for public)
@@ -106,15 +109,15 @@ angular.module('easinApp')
                   }
                    $scope.markers.push(tempMarker);
                        console.log($scope.markers);
-                   }
+                   }  */
                
-              /*API.getReports()
+           
+        API.getReports()
                    .success(function (response) {
-                   
                    for(var i = 0; i < response.data.length; i++){
                   var tempMarker = {};
                   //Image:
-                  tempMarker.image = response.data[i].properties.Image;
+                  tempMarker.image = "images/img2.jpg";
                   
                   
                   // Meta info (Invisible for public)
@@ -152,8 +155,8 @@ angular.module('easinApp')
                })
                    .error(function (error) {
                    console.log(error);
-               });*/
-           };
+               }); 
+           };    
            
            
            
