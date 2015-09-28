@@ -1,5 +1,5 @@
 (function (angular) {
-    angular.module("ui.materialize", ["ui.materialize.ngModel", "ui.materialize.collapsible", "ui.materialize.toast", "ui.materialize.sidenav", "ui.materialize.material_select", "ui.materialize.dropdown", "ui.materialize.inputfield", "ui.materialize.input_date", "ui.materialize.tabs", "ui.materialize.pagination", "ui.materialize.pushpin", "ui.materialize.parallax","ui.materialize.modal", "ui.materialize.tooltipped",  "ui.materialize.slider", "ui.materialize.materialboxed"]);
+    angular.module("ui.materialize", ["ui.materialize.ngModel", "ui.materialize.collapsible", "ui.materialize.toast", "ui.materialize.sidenav", "ui.materialize.material_select", "ui.materialize.dropdown", "ui.materialize.inputfield", "ui.materialize.input_date", "ui.materialize.tabs", "ui.materialize.pagination", "ui.materialize.pushpin", "ui.materialize.scrollspy", "ui.materialize.parallax","ui.materialize.modal", "ui.materialize.tooltipped",  "ui.materialize.slider", "ui.materialize.materialboxed"]);
 
     angular.module("ui.materialize.ngModel", [])
         .directive("ngModel",["$timeout", function($timeout){
@@ -20,21 +20,36 @@
                 }
             };
         }]);
+    
 
+    /* example usage: 
+    <div slider height='500' transition='400'></div>
+    */
     angular.module("ui.materialize.slider", [])
         .directive("slider", ["$timeout", function($timeout){
             return {
                 restrict: 'A',
+                scope: { 
+                    height: '=',
+                    transition: '=',
+                    interval: '=',
+                    indicators: '='
+                },
                 link: function(scope, element, attrs) {
                     element.addClass("slider");
                     $timeout(function(){
-                    	element.slider();
+                        element.slider({
+                            height: (angular.isDefined(scope.height)) ? scope.height : 400,
+                            transition: (angular.isDefined(scope.transition)) ? scope.transition : 500,
+                            interval: (angular.isDefined(scope.interval)) ? scope.interval : 6000,
+                            indicators: (angular.isDefined(scope.indicators)) ? scope.indicators : true
+                        });
                     });
-                   
                 }
             };
         }]);
-    
+
+
     angular.module("ui.materialize.collapsible", [])
         .directive("collapsible", ["$timeout", function ($timeout) {
             return {
@@ -110,6 +125,20 @@
             };
         }]);
 
+    // TODO: Add some documentation for this.
+    angular.module("ui.materialize.scrollspy", [])
+        .directive("scrollspy", ["$timeout", function($timeout){
+            return {
+                restrict: 'A',
+                link: function(scope, element, attrs) {
+                    element.addClass("scrollspy");
+                    $timeout(function(){
+                        element.scrollSpy();
+                    });
+                }
+            };
+        }]);
+
     angular.module("ui.materialize.tabs", [])
         .directive("tabs", [function(){
             return {
@@ -169,13 +198,11 @@
 
     /*
      Example usage, notice the empty dropdown tag in the dropdown trigger.
-
      <!-- Dropdown Trigger -->
      <a class='dropdown-button btn' href='javascript:void(0);' data-activates='demoDropdown' 
-     	dropdown constrain-width="false">
-     	Select a demo
+        dropdown constrain-width="false">
+        Select a demo
      </a>
-
      <!-- Dropdown Structure -->
      <ul id='demoDropdown' class='dropdown-content'>
      <li ng-repeat="demo in demoDefiniftions">
@@ -230,7 +257,27 @@
                     $timeout(function () {
                         Materialize.updateTextFields();
 
-                        element.find('textarea, input').each(function (index, countable) {
+                        // The "> > [selector]", is to restrict to only those tags that are direct children of the directive element. Otherwise we might hit to many elements with the selectors.
+
+                        // Triggering autoresize of the textareas.
+                        element.find("> > .materialize-textarea").each(function () {
+                            var that = $(this);
+                            that.addClass("materialize-textarea");
+                            that.trigger("autoresize");
+                            var model = that.attr("ng-model");
+                            if (model) {
+                                scope.$parent.$watch(model, function (a, b) {
+                                    if (a !== b) {
+                                        $timeout(function () {
+                                            that.trigger("autoresize");
+                                        });
+                                    }
+                                });
+                            }
+                        });
+
+                        // Adding char-counters.
+                        element.find('> > .materialize-textarea, > > input').each(function (index, countable) {
                             countable = angular.element(countable);
                             if (!countable.siblings('span[class="character-counter"]').length) {
                                 countable.characterCounter();
@@ -257,6 +304,7 @@
         weekdays-full="{{ weekdaysFullFr }}"
         weekdays-short="{{ weekdaysShortFr }}"
         weekdays-letter="{{ weekdaysLetterFr }}"
+        disable="disable"
         today="today"
         clear="clear"
         close="close"
@@ -415,6 +463,7 @@
                     monthsShort: "@",
                     weekdaysFull: "@",
                     weekdaysLetter: "@",
+                    disable: "=",
                     today: "=",
                     clear: "=",
                     close: "=",
@@ -456,6 +505,7 @@
                                 monthsShort: (angular.isDefined(monthsShort)) ? monthsShort : undefined,
                                 weekdaysFull: (angular.isDefined(weekdaysFull)) ? weekdaysFull : undefined,
                                 weekdaysLetter: (angular.isDefined(weekdaysLetter)) ? weekdaysLetter : undefined,
+                                disable: (angular.isDefined(scope.disable)) ? scope.disable : undefined,
                                 today: (angular.isDefined(scope.today)) ? scope.today : undefined,
                                 clear: (angular.isDefined(scope.clear)) ? scope.clear : undefined,
                                 close: (angular.isDefined(scope.close)) ? scope.close : undefined,
@@ -497,8 +547,9 @@
         total="100"
         pagination-action="changePage(page)"
         ul-class="customClass">
-
      * ul-class could be either an object or a string
+     *
+     * Based on https://github.com/brantwills/Angular-Paging
      */
     angular.module("ui.materialize.pagination", [])
         .directive('pagination', function () {
@@ -517,6 +568,7 @@
 
                 scope.scrollTop = scope.$eval(attrs.scrollTop);
                 scope.hideIfEmpty = scope.$eval(attrs.hideIfEmpty);
+                scope.showPrevNext = scope.$eval(attrs.showPrevNext);
             }
 
             // Validate and clean up any scope values
@@ -564,58 +616,6 @@
                 }
             }
 
-            // Previous text
-            function prev(scope, pageCount) {
-
-                // Ignore if no page prev to display
-                if(pageCount < 1) {
-                    return;
-                }
-
-                // Calculate the previous page and if the click actions are allowed
-                // blocking and disabling where page <= 0
-                var disabled = scope.page - 1 <= 0;
-                var prevPage = scope.page - 1 <= 0 ? 1 : scope.page - 1;
-
-                var prev = {
-                    value: '<',
-                    liClass: disabled ? scope.disabledClass : '',
-                    action: function () {
-                        if(!disabled) {
-                            internalAction(scope, prevPage);
-                        }
-                    }
-                };
-
-                scope.List.push(prev);
-            }
-
-            // Next text
-            function next(scope, pageCount) {
-
-                // Ignore if no page next to display
-                if(pageCount < 1) {
-                    return;
-                }
-
-                // Calculate the next page number and if the click actions are allowed
-                // blocking where page is >= pageCount
-                var disabled = scope.page + 1 > pageCount;
-                var nextPage = scope.page + 1 >= pageCount ? pageCount : scope.page + 1;
-
-                var next = {
-                    value: '>',
-                    liClass: disabled ? scope.disabledClass : '',
-                    action: function () {
-                        if(!disabled) {
-                            internalAction(scope, nextPage);
-                        }
-                    }
-                };
-
-                scope.List.push(next);
-            }
-
             // Add Range of Numbers
             function addRange(start, finish, scope) {
                 var i = 0;
@@ -650,6 +650,64 @@
                 }
             }
 
+            /**
+            * Add the first, previous, next, and last buttons if desired   
+            * The logic is defined by the mode of interest
+            * This method will simply return if the scope.showPrevNext is false
+            * This method will simply return if there are no pages to display
+            *
+            * @param {Object} scope - The local directive scope object
+            * @param {int} pageCount - The last page number or total page count
+            * @param {string} mode - The mode of interest either prev or last 
+            */
+            function addPrevNext(scope, pageCount, mode){
+                
+                // Ignore if we are not showing
+                // or there are no pages to display
+                if (!scope.showPrevNext || pageCount < 1) { return; }
+
+                // Local variables to help determine logic
+                var disabled, alpha, beta;
+
+
+                // Determine logic based on the mode of interest
+                // Calculate the previous / next page and if the click actions are allowed
+                if(mode === 'prev') {
+                    
+                    disabled = scope.page - 1 <= 0;
+                    var prevPage = scope.page - 1 <= 0 ? 1 : scope.page - 1;
+                    
+                    alpha = { value : "<<", title: 'First Page', page: 1 };
+                    beta = { value: "<", title: 'Previous Page', page: prevPage };
+                     
+                } else {
+                    
+                    disabled = scope.page + 1 > pageCount;
+                    var nextPage = scope.page + 1 >= pageCount ? pageCount : scope.page + 1;
+                    
+                    alpha = { value : ">", title: 'Next Page', page: nextPage };
+                    beta = { value: ">>", title: 'Last Page', page: pageCount };
+                }
+
+                // Create the Add Item Function
+                var addItem = function(item, disabled){           
+                    scope.List.push({
+                        value: item.value,
+                        title: item.title,
+                        liClass: disabled ? scope.disabledClass : '',
+                        action: function(){
+                            if(!disabled) {
+                                internalAction(scope, item.page);
+                            }
+                        }
+                    });
+                };
+
+                // Add our items
+                addItem(alpha, disabled);
+                addItem(beta, disabled);
+            }
+
             function addLast(pageCount, scope, prev) {
                 // We ignore dots if the previous value is one less that our start range
                 // ie: 1 2 3 4 [...] 5 6  becomes just 1 2 3 4 5 6
@@ -680,7 +738,9 @@
                 // Validation Scope
                 validateScopeValues(scope, pageCount);
 
-                prev(scope, pageCount);
+                // Add the Next and Previous buttons to our list
+                addPrevNext(scope, pageCount, 'prev');
+
                 if (pageCount < (5 + size)) {
 
                     start = 1;
@@ -717,19 +777,20 @@
 
                     }
                 }
-                next(scope, pageCount);
+                addPrevNext(scope, pageCount, 'next');
             }
 
             return {
                 restrict: 'EA',
                 scope: {
                     page: '=',
-                    pageSize: '@',
-                    total: '@',
+                    pageSize: '=',
+                    total: '=',
                     dots: '@',
                     hideIfEmpty: '@',
                     adjacent: '@',
                     scrollTop: '@',
+                    showPrevNext: '@',
                     paginationAction: '&',
                     ulClass: '=?'
                 },
@@ -746,7 +807,7 @@
                 link: function (scope, element, attrs) {
 
                     // Hook in our watched items
-                    scope.$watchCollection('[page, total]', function () {
+                    scope.$watchCollection('[page, total, pageSize]', function () {
                         build(scope, attrs);
                     });
                 }
@@ -756,19 +817,16 @@
     /*     example usage:
      <!-- Modal Trigger -->
      <a class='btn' href='#demoModal' modal>show Modal</a>
-
      <!-- Modal Structure -->
      <div id="demoModal" class="modal">
      <div class="modal-content">
      <h4>Modal Header</h4>
-
      <p>A bunch of text</p>
      </div>
      <div class="modal-footer">
      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
      </div>
      </div>
-
      */
     angular.module("ui.materialize.modal", [])
         .directive("modal", ["$compile", "$timeout", function ($compile, $timeout) {
@@ -795,11 +853,9 @@
         
         
     /*     example usage:
-
     <!-- data-position can be : bottom, top, left, or right -->
     <!-- data-delay controls delay before tooltip shows (in milliseconds)-->
     <a class="btn" tooltipped data-position="bottom" data-delay="50" data-tooltip="I am tooltip">Hover me!</a>
-
      */
     angular.module("ui.materialize.tooltipped", [])
         .directive("tooltipped", ["$compile", "$timeout", function ($compile, $timeout) {
@@ -809,23 +865,18 @@
                 link: function (scope, element, attrs) {
                     element.addClass("tooltipped");
                     $compile(element.contents())(scope);
-                    // TODO: The current Materialize implementation is broken, fixed here: https://github.com/Dogfalo/materialize/commit/30b2e1d525c5c4a721c9c84f2e33524831331e9a
-                    // When that commit reaches a release, the commented out version below will perform way better.
+
                     $timeout(function () {
-                        $('.tooltipped').tooltip();
-                    });
-                    /*$timeout(function () {
                         element.tooltip();
                     });
                     scope.$on('$destroy', function () {
                         element.tooltip("remove");
-                    });*/
+                    });
                 }
             };
         }]);
 
     /*     example usage:
-
     <!-- normal materialboxed -->
     <img materialboxed class="materialboxed responsive-img" width="650" src="images/sample-1.jpg">
     

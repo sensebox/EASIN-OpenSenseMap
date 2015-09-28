@@ -35,6 +35,7 @@ var app = angular.module('materializeApp', ['ui.materialize'])
         $scope.monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         $scope.weekdaysFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         $scope.weekdaysLetter = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+        $scope.disable = [false, 1, 7];
         $scope.today = 'Today';
         $scope.clear = 'Clear';
         $scope.close = 'Close';
