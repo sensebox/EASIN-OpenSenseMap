@@ -1,8 +1,7 @@
-node_modules
-dist
-.tmp
-.sass-cache
+logs/*
+!.gitkeep
+node_modules/
 bower_components/
-app/files/*
-app/images/*.jpeg
-**/**/**/*.db
+tmp
+.DS_Store
+.idea

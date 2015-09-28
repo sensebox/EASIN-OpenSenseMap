@@ -1,4 +1,4 @@
-angular.module('easinApp',['ngMaterial','ngRoute','leaflet-directive','ngResource','ngMorph'])
+angular.module('easinApp',['ngMaterial','ngRoute','leaflet-directive','ngResource'])
       .config(function($routeProvider){
     
     $routeProvider.when('/explore',{

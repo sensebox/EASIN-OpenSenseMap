@@ -1,22 +1,23 @@
 {
   "name": "EASIN-OpenSenseMap",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Front-End Part of Application for European Alien Species Information Network (EASIN)",
+  "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sensebox/EASIN-OpenSenseMap.git"
+    "url": "git+https://github.com/sensebox/EASIN-OpenSenseMap.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "EASIN",
+    "JRC"
+  ],
+  "author": "Aleksandr Shirokov <a_shir03@uni-muenster.de>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sensebox/EASIN-OpenSenseMap/issues"
   },
-  "homepage": "https://github.com/sensebox/EASIN-OpenSenseMap",
-  "devDependencies": {
+  "homepage": "https://github.com/sensebox/EASIN-OpenSenseMap#readme",
+  "dependencies": {
     "grunt": "^0.4.5",
     "grunt-bower-install": "^1.6.0",
     "jshint-stylish": "^2.0.1",
