@@ -5,7 +5,7 @@ angular.module('easinApp')
            $rootScope.selectedMarker = {};
            
            //Test data
-        var data =  [{
+       /* var data =  [{
     "type":"Feature",
     "geometry":{"type":"Point",
                 "coordinates":[51.966342,7.6214499],
@@ -36,7 +36,7 @@ angular.module('easinApp')
         "Status":"prevalidated",
         "Image":"images/img2.jpg"
     }
-}];
+}];*/
            
            // Markers for the different states of submission
            var icons = {
@@ -71,7 +71,7 @@ angular.module('easinApp')
          $scope.getData = function(){
          
         /** With the test data */
-            /* for(var i = 0; i < data.length; i++){
+           /*  for(var i = 0; i < data.length; i++){
                   var tempMarker = {};
                   //Image:
                   tempMarker.image = "images/img2.jpg";
@@ -116,9 +116,22 @@ angular.module('easinApp')
                    .success(function (response) {
                    for(var i = 0; i < response.data.length; i++){
                   var tempMarker = {};
-                  //Image:
-                  tempMarker.image = "images/img2.jpg";
                   
+                  //Image:
+                  
+                  //First check if its base64 encoded
+                  var base64Matcher = new RegExp("^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$");
+                  if (response.data[i].properties.Image.substring(0,4) == "data"){
+                      tempMarker.image = response.data[i].properties.Image;
+                  } else {
+                     if (base64Matcher.test(response.data[i].properties.Image)) {
+                     //Its likely base64 encoded
+                       tempMarker.image = "data:image/jpeg;base64," + response.data[i].properties.Image;
+                     } else {
+                     // It's definitely not base64 encoded. Standart Image
+                      tempMarker.image = "images/img2.jpg";
+                     }
+                  }
                   
                   // Meta info (Invisible for public)
                    tempMarker.iccid = response.data[i].properties.ICCID;

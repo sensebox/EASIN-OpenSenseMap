@@ -34,9 +34,8 @@ angular.module('easinApp',['ngMaterial','ngRoute','leaflet-directive','ngResourc
           $rootScope.asAdmin = false;
           $route.reload();
       };
-      
-      
   }]);
+
 function DialogController($scope,$rootScope,  $mdDialog) {
     $scope.adminCode = null;
     $scope.checkLogin = function() {
