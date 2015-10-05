@@ -67,14 +67,13 @@ angular.module('easinApp')
       };
            
         // Fetch the data on the initial start of the application
-                
          $scope.getData = function(){
          
         /** With the test data */
            /*  for(var i = 0; i < data.length; i++){
                   var tempMarker = {};
                   //Image:
-                  tempMarker.image = "images/img2.jpg";
+                  tempMarker.image = data[i].properties.Image;
                   
                   
                   // Meta info (Invisible for public)
@@ -109,16 +108,16 @@ angular.module('easinApp')
                   }
                    $scope.markers.push(tempMarker);
                        console.log($scope.markers);
-                   }  */
+                   }
                
-           
-        API.getReports()
+              /*API.getReports()
                    .success(function (response) {
+                   
                    for(var i = 0; i < response.data.length; i++){
                   var tempMarker = {};
                   
                   //Image:
-                  
+  
                   //First check if its base64 encoded
                   var base64Matcher = new RegExp("^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$");
                   if (response.data[i].properties.Image.substring(0,4) == "data"){
@@ -168,8 +167,8 @@ angular.module('easinApp')
                })
                    .error(function (error) {
                    console.log(error);
-               }); 
-           };    
+               });*/
+           };
            
            
            
