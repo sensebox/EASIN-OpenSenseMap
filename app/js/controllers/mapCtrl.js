@@ -108,9 +108,9 @@ angular.module('easinApp')
                   }
                    $scope.markers.push(tempMarker);
                        console.log($scope.markers);
-                   }
+                   }*/
                
-              /*API.getReports()
+            API.getReports()
                    .success(function (response) {
                    
                    for(var i = 0; i < response.data.length; i++){
@@ -167,7 +167,7 @@ angular.module('easinApp')
                })
                    .error(function (error) {
                    console.log(error);
-               });*/
+               });
            };
            
            
