@@ -1,7 +1,8 @@
 'use strict';
 
+// Change the value of 'Server' to the proper path to the server part, so that it would point to the all available reports
 angular.module('easinApp')
-.value('Server', 'http://localhost:80/reports')
+.value('Server', 'http://46.101.195.50:8080/reports')
 
   .factory('API', ['$http','Server', function ($http,Server) {
       
@@ -15,12 +16,12 @@ angular.module('easinApp')
         return $http.get(Server + '/' + id);
     };
 
-    API.insertReport = function () {
-        return $http.post(Server);
+    API.insertReport = function (report) {
+        return $http.post(Server, report);
     };
 
-    API.updateReport = function (id) {
-        return $http.put(Server + '/' + id)
+    API.updateReport = function (id, report) {
+        return $http.put(Server + '/' + id, report)
     };
 
     API.deleteReport = function (id) {

@@ -3,17 +3,17 @@
 	<leaflet center="center" markers="markers" defaults="defaults" controls="controls" id="map">
 	</leaflet>
     
-   <div class="report-card" ng-show =" isEmpty(selectedMarker)">
+   <div class="report-card" ng-show ="isEmpty(selectedMarker)" click-outside="hideCard()">
           <div class="card" style ="relative">
             <div class="card-image title-info">
-              <img class="materialboxed responsive-img" data-ng-src="{{selectedMarker.image}}">
+              <img class="materialboxed responsive-img" src="{{selectedMarker.image}}">
               <span class="card-title">
                   <span class="middle-tile"> 
                       <h1><span style =" font-family: ‘Metrophobic’, Arial, serif; font-weight: 700;" >Status:</span> {{selectedMarker.status}}</h1> 
                   </span >  
                 </span>
             </div>
-             <div class="card-content" style="background-color:#F2FCFF; overflow-y:scroll;">
+             <div class="card-content" style="background-color:#F2FCFF; overflow:auto;">
                  <div class ="tile-coord">
                      <div class = "tile-coord-info">
                          <p class="tile-header">Coordinates</p>

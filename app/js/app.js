@@ -1,4 +1,4 @@
-angular.module('easinApp',['ngMaterial','ngRoute','leaflet-directive','ngResource'])
+angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leaflet-directive','ngResource'])
       .config(function($routeProvider){
     
     $routeProvider.when('/explore',{
@@ -34,8 +34,19 @@ angular.module('easinApp',['ngMaterial','ngRoute','leaflet-directive','ngResourc
           $rootScope.asAdmin = false;
           $route.reload();
       };
+      
+      $scope.newReport = function(ev){
+           $mdDialog.show({
+            controller: createController,
+            templateUrl: 'views/edit_modal.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true
+             });
+      };
+      
+      
   }]);
-
 function DialogController($scope,$rootScope,  $mdDialog) {
     $scope.adminCode = null;
     $scope.checkLogin = function() {
@@ -49,4 +60,52 @@ function DialogController($scope,$rootScope,  $mdDialog) {
        }
         $mdDialog.hide();
      };
+  };
+function createController($scope,$rootScope,$http,API,$mdDialog) {
+   $scope.exampleData1 =  {
+    "type":"Feature",
+    "geometry":{"type":"Point",
+                "coordinates":[51.966342,7.6214499],
+               },
+    "properties":{
+        "ICCID":"1234567890123456789",
+        "OAUTHID":"abc@gmail.com",
+        "LSID":"urn:lsid:alien.jrc.ec.europa.eu:species:R02004:4.6",
+        "Abundance":"15",
+        "Precision":"Precise",
+        "Comment":"whatever I find worth adding",
+        "Status":"submitted",
+        "Anonymous": true,
+        "Image":"images/img3.jpg"
+    }
+};
+    
+   $scope.exampleData2 = {
+    "type":"Feature",
+    "geometry":{"type":"Point",
+                "coordinates":[53.966342,8.6214499],
+               },
+    "properties":{
+        "ICCID":"2948592846928745",
+        "OAUTHID":"cba@gmail.com",
+        "LSID":"urn:lsid:alien.jrc.ec.europa.eu:species:R02004:4.6",
+        "Abundance":"35",
+        "Precision":"Approximate",
+        "Comment":"whatever I find worth adding",
+        "Status":"prevalidated",
+        "Anonymous": false,
+        "Image":"images/img2.jpg"
+    }
+};
+        
+    $scope.submitReport = function() {
+        API.insertReport($scope.exampleData1)
+                   .success(function (response) {
+                    $mdDialog.hide();
+                   
+                })
+                   .error(function (error) {
+                   $mdDialog.hide();
+                });
+     }; 
   };

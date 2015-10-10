@@ -45,7 +45,8 @@
         <label>Comment</label>
         <textarea ng-model="selectedMarker.comment" columns="1" md-maxlength="150"></textarea>
       </md-input-container>
-        <md-button class="md-raised md-primary" ng-click = "saveEditedMarker()" style = "width:95%;background-color:#4CAF50;">Save</md-button>
+        <md-button class="md-raised md-primary" ng-click = "saveEditedMarker(selectedMarker)" style = "width:95%;background-color:#4CAF50;">Save</md-button>
+         <!-- <md-button class="md-raised md-primary" ng-click = "submitReport()" style = "width:95%;background-color:#4CAF50;">Create</md-button>  -->
     </form>
   </md-content>
 </div>
