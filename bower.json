@@ -10,9 +10,10 @@
     "angular": "1.4.5",
     "angular-animate": "1.4.5",
     "angular-aria": "1.4.5",
+    "angular-bootstrap": "0.13.4",
+    "angular-click-outside": "~2.1.0",
     "angular-leaflet": "0.7.11",
     "angular-material": "~0.10.1",
-    "angular-click-outside": "~2.1.0",
     "angular-materialize": "*",
     "angular-resource": "1.4.5",
     "angular-route": "1.4.5",
@@ -21,8 +22,8 @@
     "jquery": "2.1.4",
     "leaflet": "0.7.3",
     "Leaflet.awesome-markers": "2.0.2",
-    "angular-bootstrap": "0.13.4",
-    "material-design-lite": "~1.0.4"
+    "material-design-lite": "~1.0.4",
+    "svg-morpheus": "~0.1.8"
   },
   "resolutions": {
     "angular": "1.4.5",
