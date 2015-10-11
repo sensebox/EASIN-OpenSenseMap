@@ -1,4 +1,4 @@
-angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leaflet-directive','ngResource'])
+angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leaflet-directive','ngResource','ngMdIcons'])
       .config(function($routeProvider){
     
     $routeProvider.when('/explore',{
@@ -47,18 +47,31 @@ angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leafl
       
       
   }]);
-function DialogController($scope,$rootScope,  $mdDialog) {
+function DialogController($scope,$rootScope,  $mdDialog,$timeout) {
     $scope.adminCode = null;
+    
+    $scope.icon = 'account_circle';
+    $scope.icon_color = "white";
+    
     $scope.checkLogin = function() {
         /* This step should be reworked. Potentially, we need one more collection with admin info.
             For now, login - admin and password - 123    */
        if ($scope.login == 'admin' && $scope.password == 123){
            $rootScope.userType = "Admin";
            $rootScope.asAdmin = true;
+           $scope.icon = 'verified_user';
+           $timeout(function() {
+            $mdDialog.hide();
+           }, 1200);
+           
        } else{
             $scope.asAdmin = false;
+            $scope.icon = 'highlight_remove';
+           
+            $timeout(function() {
+            $scope.icon = 'account_circle';
+           }, 1800);
        }
-        $mdDialog.hide();
      };
   };
 function createController($scope,$rootScope,$http,API,$mdDialog) {

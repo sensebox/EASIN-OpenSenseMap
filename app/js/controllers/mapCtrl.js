@@ -66,13 +66,13 @@ angular.module('easinApp')
                    tempMarker.lng = response[i].geometry.coordinates[1];
                   
                        
-                  if (response[i].properties.Status == "submitted"){
+                  if (response[i].properties.Status == "Submitted"){
                      tempMarker.icon = icons.submitted;
                      tempMarker.status = "Submitted";                    
-                  } else if (response[i].properties.Status == "prevalidated"){
+                  } else if (response[i].properties.Status == "Prevalidated"){
                       tempMarker.icon = icons.prevalid;
                       tempMarker.status = "Prevalidated";
-                  } else if (response[i].properties.Status == "validated"){
+                  } else if (response[i].properties.Status == "Validated"){
                       tempMarker.icon = icons.valid;
                       tempMarker.status = "Validated";
                   } else {
