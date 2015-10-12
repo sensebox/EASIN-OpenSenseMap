@@ -1,0 +1,21 @@
+<md-dialog>
+  <form>
+  <md-dialog-content style = "background-color:#4CAF50;">
+        <div class="md-center">
+         <!-- <i class="material-icons md-48 md-light">account_circle</i> -->
+               <ng-md-icon icon = "warning" style = "fill:white;" size = "85"></ng-md-icon>
+    </div>
+        <div class="remove-header">
+          <h2>Are you sure?</h2>
+        </div>
+      <div style = "display: flex;">
+          <div>
+              <md-button class="md-raised" ng-click = "removeReport()">Yes, Remove</md-button>
+          </div>
+          <div>
+              <md-button class="md-raised" ng-click = "cancelRemoving()">No, Cancel</md-button>
+          </div>
+      </div>
+  </md-dialog-content>
+  </form>
+</md-dialog>

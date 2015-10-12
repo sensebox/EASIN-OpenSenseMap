@@ -45,22 +45,31 @@
                      <p class="tile-header">LSID</p>
                           <p class="tile-info" >{{selectedMarker.lsid}}</p>
                  </div>
-                 
+                
                  <!-- Part which is visible only for admins -->
                  <div class = "admin-visible" ng-show="userType == 'Admin'">
-                     <div class="admin-info">
+                     <div class="admin-iccid">
                          <div class ="tile-iccid">
                              <p class="tile-header">ICCID</p>
                              <p class="tile-info" >{{selectedMarker.iccid}}</p>
                          </div>
+                         <div class="admin-edit-button">
+                            <md-button class="md-fab md-mini md-primary" style = "background-color:#4CAF50;" ng-click="startEdit()" aria-label="Use Android">
+                            <i class="fa fa-pencil"></i>
+                           </md-button>
+                         </div>
+                     </div>
+                     <div class="admin-oathid">
                          <div class ="tile-oauthid">
                              <p class="tile-header">OAUTH-ID</p>
                              <p class="tile-info" >{{selectedMarker.oauth}}</p>
                          </div>
+                         <div class="admin-delete-button">
+                             <md-button class="md-fab md-mini md-primary" style = "background-color:#F44336;" ng-click="deleteReport()" aria-label="Use Android">
+                               <i class="fa fa-trash-o"></i>
+                           </md-button>
+                         </div>
                      </div>
-                     <md-button class="md-fab md-mini md-primary" style = "background-color:#4CAF50;" ng-click="startEdit()" aria-label="Use Android">
-                        <i class="fa fa-pencil"></i>
-                     </md-button>
-                 </div>
+                 </div>     
       </div> 
 </div>

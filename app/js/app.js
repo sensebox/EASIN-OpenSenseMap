@@ -1,4 +1,4 @@
-angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leaflet-directive','ngResource','ngMdIcons'])
+angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leaflet-directive','ngResource','ngMdIcons','ngCookies'])
       .config(function($routeProvider){
     
     $routeProvider.when('/explore',{
@@ -13,11 +13,19 @@ angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leafl
     
     .otherwise({redirectTo: '/'});
 })
-  .controller('HeaderCtrl', ['$scope', '$rootScope',  '$route','$mdDialog', function ($scope, $rootScope, $route, $mdDialog) {
+  .controller('HeaderCtrl', ['$scope', '$rootScope',  '$route','$mdDialog','$cookies', function ($scope, $rootScope, $route, $mdDialog, $cookies) {
       // Login as an admin of EASIN in order to start editing
-      $rootScope.userType = "Login";
-      $rootScope.asAdmin = false;
+      if ($cookies.get('user') == undefined){
+          $cookies.put('user', 'Login');
+      }
+      if ($cookies.get('asAdmin') == undefined){
+          $cookies.put('asAdmin', false);
+      }
+      $rootScope.userType = $cookies.get('user');
+      $rootScope.asAdmin = $cookies.get('asAdmin');
       
+       console.log($rootScope.asAdmin);
+          
       $scope.showConfirm = function(ev) {
         $mdDialog.show({
          controller: DialogController,
@@ -30,15 +38,19 @@ angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leafl
       
       // Exit admin mode
       $scope.logOut = function(){
-          $rootScope.userType = "Login";
-          $rootScope.asAdmin = false;
+          //Setting cookies
+          $cookies.put('user', 'Login');
+          $cookies.put('asAdmin', false);
+          
+          $rootScope.userType = $cookies.get('user');
+          $rootScope.asAdmin = $cookies.get('asAdmin');
           $route.reload();
       };
       
       $scope.newReport = function(ev){
            $mdDialog.show({
             controller: createController,
-            templateUrl: 'views/edit_modal.html',
+            templateUrl: 'views/create-modal.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true
@@ -47,7 +59,7 @@ angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leafl
       
       
   }]);
-function DialogController($scope,$rootScope,  $mdDialog,$timeout) {
+function DialogController($scope,$rootScope,  $mdDialog,$timeout,$cookies) {
     $scope.adminCode = null;
     
     $scope.icon = 'account_circle';
@@ -56,16 +68,21 @@ function DialogController($scope,$rootScope,  $mdDialog,$timeout) {
     $scope.checkLogin = function() {
         /* This step should be reworked. Potentially, we need one more collection with admin info.
             For now, login - admin and password - 123    */
-       if ($scope.login == 'admin' && $scope.password == 123){
-           $rootScope.userType = "Admin";
-           $rootScope.asAdmin = true;
+       if ($scope.login.toLowerCase() == 'admin' && $scope.password == 123){
+           //Set an admin cookie
+           $cookies.put('user', 'Admin');
+           $cookies.put('asAdmin', true);
+           
+           $rootScope.userType = $cookies.get('user');
+           $rootScope.asAdmin = $cookies.get('asAdmin');
+           
            $scope.icon = 'verified_user';
+           
            $timeout(function() {
             $mdDialog.hide();
            }, 1200);
            
        } else{
-            $scope.asAdmin = false;
             $scope.icon = 'highlight_remove';
            
             $timeout(function() {
@@ -87,7 +104,7 @@ function createController($scope,$rootScope,$http,API,$mdDialog) {
         "Abundance":"15",
         "Precision":"Precise",
         "Comment":"whatever I find worth adding",
-        "Status":"submitted",
+        "Status":"Submitted",
         "Anonymous": true,
         "Image":"images/img3.jpg"
     }
@@ -105,14 +122,14 @@ function createController($scope,$rootScope,$http,API,$mdDialog) {
         "Abundance":"35",
         "Precision":"Approximate",
         "Comment":"whatever I find worth adding",
-        "Status":"prevalidated",
+        "Status":"Prevalidated",
         "Anonymous": false,
         "Image":"images/img2.jpg"
     }
 };
         
     $scope.submitReport = function() {
-        API.insertReport($scope.exampleData1)
+        API.insertReport($scope.exampleData2)
                    .success(function (response) {
                     $mdDialog.hide();
                    

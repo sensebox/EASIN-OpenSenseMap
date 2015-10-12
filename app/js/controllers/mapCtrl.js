@@ -141,6 +141,17 @@ angular.module('easinApp')
              });
            };
            
+           // Remove Modal Window
+        $scope.deleteReport = function(ev) {
+           $mdDialog.show({
+            controller: removeController,
+            templateUrl: 'views/remove-modal.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true
+             });
+        };
+           
         $scope.hideCard = function(){
             $scope.close = true;
             console.log($scope.close);
@@ -165,7 +176,7 @@ function editController($scope, $rootScope, API, $mdDialog) {
                },
     "properties":{
         "ICCID": $scope.selectedMarker.iccid,
-        "OAUTHID": $scope.selectedMarker.oath,
+        "OAUTHID": $scope.selectedMarker.oauth,
         "LSID": $scope.selectedMarker.lsid,
         "Abundance": $scope.selectedMarker.abundance,
         "Precision": $scope.selectedMarker.precision,
@@ -175,11 +186,10 @@ function editController($scope, $rootScope, API, $mdDialog) {
         "Image":"images/img3.jpg"
     }
 };
-        
-        
-        
+    
         API.updateReport($scope.selectedMarker.id, $scope.updatedData)
                    .success(function (response) {
+            console.log($scope.updatedData);
                     $mdDialog.hide();
                    
                 })
@@ -188,6 +198,26 @@ function editController($scope, $rootScope, API, $mdDialog) {
                    $mdDialog.hide();
                 });
     };
-    
-    
   };
+
+
+function removeController($scope, $rootScope, API, $mdDialog,$route) {
+    $scope.markerToDelete = $rootScope.selectedMarker;
+    
+    $scope.removeReport = function(){
+        API.deleteReport($scope.markerToDelete.id)
+                   .success(function (response) {
+                    $mdDialog.hide();
+                    $route.reload();
+                   
+                })
+                   .error(function (error) {
+                   console.log($error);
+                   $mdDialog.hide();
+                });
+    };
+    
+    $scope.cancelRemoving = function(){
+        $mdDialog.hide();
+    };
+}

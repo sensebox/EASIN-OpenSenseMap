@@ -255,6 +255,17 @@ a:hover {
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .md-center { text-align: center; }
 
+.remove-header h2{
+     font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 1.4;
+   text-align: center;
+    margin-bottom:0;
+    color:white;
+}
+
 .login-header h2{
    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
@@ -435,10 +446,68 @@ a:hover {
 
 /*  Tile, which is visible only for admins */
 .admin-visible{
-    display: flex;
+    display: block;
     position: relative;
 }
+.admin-visible .admin-iccid{
+    display: flex;
+    position:relative;
+}
+.admin-visible .admin-iccid .tile-iccid{
+    display: block;
+}
+.admin-visible .admin-iccid .tile-iccid .tile-header{
+   text-align: justify;
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+}
+.admin-visible .admin-iccid .tile-iccid .tile-info{
+  text-align: center;
+  text-align: justify;
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+}
 
+.admin-visible .admin-iccid .admin-edit-button .md-button{
+    position: absolute;
+    right:0;
+}
+
+
+.admin-visible .admin-oathid {
+     display: flex;
+    position:relative;
+}
+.admin-visible .admin-oathid .tile-oauthid{
+     display: block;
+}
+.admin-visible .admin-oathid .tile-oauthid .tile-header{
+  text-align: justify;
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+}
+.admin-visible .admin-oathid .tile-oauthid .tile-info{
+    text-align: center;
+      text-align: justify;
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+.admin-visible .admin-oathid .admin-delete-button .md-button{
+    position: absolute;
+    right:0;
+}
+
+
+/*
 .admin-visible .md-button{
     position: absolute;
     right:0;
@@ -487,4 +556,4 @@ a:hover {
   font-style: normal;
   font-weight: 300;
   font-size: 15px;
-}
+}*/

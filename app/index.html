@@ -32,17 +32,17 @@
                     <div id="brand_with_logo"><a class="navbar-brand" href="#/"><img src="images/rsz_3europe-flag.png">&nbsp;EASIN</a></div>
                 </div>
                 <ul class="nav navbar-nav navbar-right">        
-                    <li ng-disabled="asAdmin">
-                            <a ng-click="showConfirm($event)" ng-hide = "asAdmin">
+                    <li ng-disabled="asAdmin == 'true'">
+                            <a ng-click="showConfirm($event)" ng-hide = "asAdmin == 'true'">
                                 <span class="glyphicon glyphicon-user"></span> {{userType}}
                             </a>
                         </li>
-                    <li ng-disabled="asAdmin">
-                            <a ng-show="asAdmin">
+                    <li ng-disabled="asAdmin == 'true'">
+                            <a ng-show="asAdmin == 'true'">
                                 <span class="glyphicon glyphicon-user"></span> {{userType}}
                             </a>
                         </li>
-                      <li ng-show = "asAdmin">
+                      <li ng-show = "asAdmin == 'true'">
                             <a ng-click="newReport()">
                                 <span class="glyphicon glyphicon-plus-sign"></span>  New Report
                             </a>
@@ -50,7 +50,7 @@
                   <!--  <li class="dropdown">
                             <a >Language <span class="caret"></span></a>
                         </li>  -->
-                       <li ng-show = "asAdmin">
+                       <li ng-show = "asAdmin == 'true'">
                             <a ng-click="logOut()">
                                 <span class="glyphicon glyphicon-log-out"></span>  Exit
                             </a>
@@ -74,7 +74,8 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
     <script src="bower_components/material-design-lite/material.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-click-outside/clickoutside.directive.js"></script>
+    <script src="bower_components/angular-click-outside/clickoutside.directive.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     
     <!-- Icons for Morphing Effect -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script> 
