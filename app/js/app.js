@@ -13,7 +13,7 @@ angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leafl
     
     .otherwise({redirectTo: '/'});
 })
-  .controller('HeaderCtrl', ['$scope', '$rootScope',  '$route','$mdDialog','$cookies', function ($scope, $rootScope, $route, $mdDialog, $cookies) {
+  .controller('HeaderCtrl', ['$scope', '$rootScope',  '$route','$mdDialog','$cookies','API', function ($scope, $rootScope, $route, $mdDialog, $cookies,API) {
       // Login as an admin of EASIN in order to start editing
       if ($cookies.get('user') == undefined){
           $cookies.put('user', 'Login');
@@ -47,14 +47,75 @@ angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leafl
           $route.reload();
       };
       
-      $scope.newReport = function(ev){
-           $mdDialog.show({
+      $scope.newReport = function(){
+          function getRandom( min,  max){
+              return Math.random() * (max - min) + min;
+          };
+                  $scope.examples =  [{
+    "type":"Feature",
+    "geometry":{"type":"Point",
+                "coordinates":[getRandom(45,55),getRandom(5,15)],
+               },
+    "properties":{
+        "ICCID":"1234567890123456789",
+        "OAUTHID":"abc@gmail.com",
+        "LSID":"urn:lsid:alien.jrc.ec.europa.eu:species:R02004:4.6",
+        "Abundance":"15",
+        "Precision":"Precise",
+        "Comment":"whatever I find worth adding",
+        "Status":"Submitted",
+        "Anonymous": true,
+        "Image":"images/img3.jpg"
+    }
+  }, {
+    "type":"Feature",
+    "geometry":{"type":"Point",
+                "coordinates":[getRandom(45,55),getRandom(5,15)],
+               },
+    "properties":{
+        "ICCID":"2948524523423745",
+        "OAUTHID":"asdgasdg@gmail.com",
+        "LSID":"urn:lsid:alien.jrc.ec.europa.eu:species:R02004:4.6",
+        "Abundance":"65",
+        "Precision":"Approximate",
+        "Comment":"whatever I find worth adding",
+        "Status":"Prevalidated",
+        "Anonymous": false,
+        "Image":"images/img2.jpg"
+    }
+}, { 
+    "type":"Feature",
+    "geometry":{"type":"Point",
+                "coordinates":[getRandom(45,55),getRandom(5,15)],
+               },
+    "properties":{
+        "ICCID":"2948592846928745",
+        "OAUTHID":"cba@gmail.com",
+        "LSID":"urn:lsid:alien.jrc.ec.europa.eu:species:R02004:4.6",
+        "Abundance":"35",
+        "Precision":"Approximate",
+        "Comment":"whatever I find worth adding",
+        "Status":"Validated",
+        "Anonymous": false,
+        "Image":"images/img1.jpg"
+    }
+}];
+             for (var i = 0; i < $scope.examples.length; i++){
+                  API.insertReport($scope.examples[i])
+                   .success(function (response) {
+                      $route.reload; 
+                })
+                   .error(function (error) {
+                });
+             }
+          
+          /* $mdDialog.show({
             controller: createController,
             templateUrl: 'views/create-modal.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true
-             });
+             });*/
       };
       
       
