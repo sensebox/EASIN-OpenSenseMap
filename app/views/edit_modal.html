@@ -17,9 +17,14 @@
     <form name="userForm">
     <div layout layout-sm="column">
         <md-input-container flex>
-        <label>Status</label>
-        <textarea ng-model="selectedMarker.status" columns="1" md-maxlength="150"></textarea>
-      </md-input-container>
+          <label>Status</label>
+          <md-select ng-model="selectedMarker.status">
+            <md-option ng-repeat="status in statuses" value="{{status.abbrev}}">
+              {{status.abbrev}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        
         </div>
       <div layout layout-sm="column">
          <md-input-container flex>
@@ -37,7 +42,7 @@
           <input ng-model="selectedMarker.iccid">
         </md-input-container>
         <md-input-container flex>
-          <label>OAUTH-ID</label>
+          <label>Observed by (OAUTH-ID):</label>
           <input ng-model="selectedMarker.oauth">
         </md-input-container>
       </div>

@@ -1,4 +1,4 @@
-angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leaflet-directive','ngResource','ngMdIcons','ngCookies'])
+angular.module('easinApp',['ui.bootstrap','angular-click-outside','ngMaterial','ngRoute','leaflet-directive','ngResource','ngMdIcons','ngCookies'])
       .config(function($routeProvider){
     
     $routeProvider.when('/explore',{
@@ -120,7 +120,7 @@ angular.module('easinApp',['angular-click-outside','ngMaterial','ngRoute','leafl
       
       
   }]);
-function DialogController($scope,$rootScope,  $mdDialog,$timeout,$cookies) {
+function DialogController($scope,$rootScope,  $mdDialog,$timeout,$cookies,$route) {
     $scope.adminCode = null;
     
     $scope.icon = 'account_circle';
@@ -141,6 +141,8 @@ function DialogController($scope,$rootScope,  $mdDialog,$timeout,$cookies) {
            
            $timeout(function() {
             $mdDialog.hide();
+            $route.reload();
+            
            }, 1200);
            
        } else{

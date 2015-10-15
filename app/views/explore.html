@@ -7,7 +7,11 @@
           <div class="card" style ="relative">
             <div class="card-image title-info">
               <img class="materialboxed responsive-img" src="{{selectedMarker.image}}">
+                <!-- Status -->
               <span class="card-title">
+                  <a ng-click = "observedBy()">
+                     <i class="fa fa-user fa-lg" style = "color:white;"></i>
+                   </a>
                   <span class="middle-tile"> 
                       <h1><span style =" font-family: ‘Metrophobic’, Arial, serif; font-weight: 700;" >Status:</span> {{selectedMarker.status}}</h1> 
                   </span >  
@@ -47,8 +51,8 @@
                  </div>
                 
                  <!-- Part which is visible only for admins -->
-                 <div class = "admin-visible" ng-show="userType == 'Admin'">
-                     <div class="admin-iccid">
+                 <div class = "admin-visible" >
+                     <div class="admin-iccid" ng-show="userType == 'Admin'">
                          <div class ="tile-iccid">
                              <p class="tile-header">ICCID</p>
                              <p class="tile-info" >{{selectedMarker.iccid}}</p>
@@ -61,10 +65,10 @@
                      </div>
                      <div class="admin-oathid">
                          <div class ="tile-oauthid">
-                             <p class="tile-header">OAUTH-ID</p>
-                             <p class="tile-info" >{{selectedMarker.oauth}}</p>
+                             <p class="tile-header">Observed by (OAUTH-ID): </p>
+                             <p class="tile-info">{{selectedMarker.oauth}}</p>
                          </div>
-                         <div class="admin-delete-button">
+                         <div class="admin-delete-button" ng-show="userType == 'Admin'">
                              <md-button class="md-fab md-mini md-primary" style = "background-color:#F44336;" ng-click="deleteReport()" aria-label="Use Android">
                                <i class="fa fa-trash-o"></i>
                            </md-button>

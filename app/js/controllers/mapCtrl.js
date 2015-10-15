@@ -5,19 +5,20 @@ angular.module('easinApp')
            $rootScope.selectedMarker = {};
            $scope.close = false;
         
+           
            // Markers for the different states of submission
            var icons = {
                 submitted: {
                     type: 'awesomeMarker',
           prefix: 'fa',
           icon: 'bug',
-          markerColor: 'orange',  
+          markerColor: 'red',  
                 },
         prevalid: {
           type: 'awesomeMarker',
           prefix: 'fa',
           icon: 'bug',
-          markerColor: 'yellow',
+          markerColor: 'orange',
         },
         valid: {
           type: 'awesomeMarker',
@@ -29,7 +30,7 @@ angular.module('easinApp')
             type: 'awesomeMarker',
           prefix: 'fa',
           icon: 'bolt',
-          markerColor: 'red'
+          markerColor: 'black'
         }
       };
            
@@ -51,7 +52,13 @@ angular.module('easinApp')
                        
                   // Meta info (Invisible for public)
                    tempMarker.iccid = response[i].properties.ICCID;
-                   tempMarker.oauth = response[i].properties.OAUTHID;
+                    
+                if ($rootScope.userType != 'Admin' && response[i].properties.Anonymous == true){ 
+                    tempMarker.oauth = 'Anonymous';
+                }else {
+                    tempMarker.oauth = response[i].properties.OAUTHID;
+                }
+                       tempMarker.trueOauth =  response[i].properties.OAUTHID;
                        
                   //Visible for public
                    tempMarker.lsid = response[i].properties.LSID;
@@ -80,7 +87,11 @@ angular.module('easinApp')
                       tempMarker.status = "missing";
                   }
                    
-                   $scope.markers.push(tempMarker);
+                       if ($rootScope.userType != 'Admin' && tempMarker.status == 'Submitted'){
+                          // $scope.markers.push(tempMarker);
+                       } else {
+                           $scope.markers.push(tempMarker);
+                       }
                    }
                })
                    .error(function (error) {
@@ -100,10 +111,11 @@ angular.module('easinApp')
            console.log($scope.close);
          });
            
-           //Check if selectedMarker is empty
+           //Check if selectedMarker is empty and whether admin is loggen in
            $scope.isEmpty = function(obj){
                return (Object.keys(obj).length != 0);
            };
+           
            
            // Leaflet map
            angular.extend($scope, {
@@ -154,13 +166,27 @@ angular.module('easinApp')
            
         $scope.hideCard = function(){
             $scope.close = true;
-            console.log($scope.close);
+        };
+           
+        // Modal with info about username / anonymous
+        $scope.observedBy = function(ev) {
+           $mdDialog.show({
+            controller: userController,
+            templateUrl: 'views/user-modal.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true
+             });
         };
            
        }]);
 
-
-function editController($scope, $rootScope, API, $mdDialog) {
+function editController($scope, $rootScope, API, $mdDialog, $route) {
+    
+    $scope.statuses = ('Submitted Prevalidated Validated').split(' ').map(function(status) {
+        return {abbrev: status};
+      })
+    
     $scope.selectedMarker = $rootScope.selectedMarker;
 
     $scope.saveEditedMarker = function(marker){
@@ -176,7 +202,7 @@ function editController($scope, $rootScope, API, $mdDialog) {
                },
     "properties":{
         "ICCID": $scope.selectedMarker.iccid,
-        "OAUTHID": $scope.selectedMarker.oauth,
+        "OAUTHID": $scope.selectedMarker.trueOauth,
         "LSID": $scope.selectedMarker.lsid,
         "Abundance": $scope.selectedMarker.abundance,
         "Precision": $scope.selectedMarker.precision,
@@ -191,17 +217,39 @@ function editController($scope, $rootScope, API, $mdDialog) {
                    .success(function (response) {
             console.log($scope.updatedData);
                     $mdDialog.hide();
-                   
+                   $route.reload();
                 })
                    .error(function (error) {
                   console.log($error);
                    $mdDialog.hide();
+            $route.reload();
                 });
     };
   };
 
 
 function removeController($scope, $rootScope, API, $mdDialog,$route) {
+    $scope.markerToDelete = $rootScope.selectedMarker;
+    
+    $scope.removeReport = function(){
+        API.deleteReport($scope.markerToDelete.id)
+                   .success(function (response) {
+                    $mdDialog.hide();
+                    $route.reload();
+                   
+                })
+                   .error(function (error) {
+                   console.log($error);
+                   $mdDialog.hide();
+                });
+    };
+    
+    $scope.cancelRemoving = function(){
+        $mdDialog.hide();
+    };
+}
+
+function userController($scope, $rootScope, API, $mdDialog, $route) {
     $scope.markerToDelete = $rootScope.selectedMarker;
     
     $scope.removeReport = function(){
