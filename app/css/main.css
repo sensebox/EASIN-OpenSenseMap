@@ -419,6 +419,33 @@ a:hover {
   font-size: 15px;
 }
 
+/*  Tile with Status */
+.tile-status{
+    display: block;
+    overflow:auto;
+    text-align: center;
+}
+
+
+.tile-status .tile-header{
+    text-align: justify;
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+    text-align: center;
+}
+.tile-status .tile-info{
+    text-align: center;
+      text-align: justify;
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+    text-align: center;
+}
+
+
 
 /*  Tile with LSID code */
 .tile-lsid{

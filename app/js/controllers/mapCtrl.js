@@ -87,11 +87,7 @@ angular.module('easinApp')
                       tempMarker.status = "missing";
                   }
                    
-                       if ($rootScope.userType != 'Admin' && tempMarker.status == 'Submitted'){
-                          // $scope.markers.push(tempMarker);
-                       } else {
                            $scope.markers.push(tempMarker);
-                       }
                    }
                })
                    .error(function (error) {
