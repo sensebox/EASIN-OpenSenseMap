@@ -205,7 +205,7 @@ function editController($scope, $rootScope, API, $mdDialog, $route) {
         "Comment": $scope.selectedMarker.comment,
         "Status": $scope.selectedMarker.status,
         "Anonymous": true,
-        "Image":"images/img3.jpg"
+        "Image": $scope.selectedMarker.image
     }
 };
     
@@ -213,12 +213,12 @@ function editController($scope, $rootScope, API, $mdDialog, $route) {
                    .success(function (response) {
             console.log($scope.updatedData);
                     $mdDialog.hide();
-                   $route.reload();
+                   //$route.reload();
                 })
                    .error(function (error) {
                   console.log($error);
                    $mdDialog.hide();
-            $route.reload();
+           // $route.reload();
                 });
     };
   };
