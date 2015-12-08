@@ -1,13 +1,15 @@
 angular.module('easinApp')
        .controller('mapCtrl',['$scope','$rootScope','$http','API','$mdDialog', function($scope,$rootScope, $http, API, $mdDialog){
                 
-           $scope.markers = [];
+           $rootScope.markers = [];
            $rootScope.selectedMarker = {};
+           $scope.lastextent = {};
+           
            $scope.close = false;
         
            
            // Markers for the different states of submission
-           var icons = {
+           $rootScope.icons = {
                 submitted: {
                     type: 'awesomeMarker',
           prefix: 'fa',
@@ -74,20 +76,20 @@ angular.module('easinApp')
                   
                        
                   if (response[i].properties.Status == "Submitted"){
-                     tempMarker.icon = icons.submitted;
+                     tempMarker.icon = $rootScope.icons.submitted;
                      tempMarker.status = "Submitted";                    
                   } else if (response[i].properties.Status == "Prevalidated"){
-                      tempMarker.icon = icons.prevalid;
+                      tempMarker.icon = $rootScope.icons.prevalid;
                       tempMarker.status = "Prevalidated";
                   } else if (response[i].properties.Status == "Validated"){
-                      tempMarker.icon = icons.valid;
+                      tempMarker.icon = $rootScope.icons.valid;
                       tempMarker.status = "Validated";
                   } else {
-                      tempMarker.icon = icons.missing;
+                      tempMarker.icon = $rootScope.icons.missing;
                       tempMarker.status = "missing";
                   }
                    
-                           $scope.markers.push(tempMarker);
+                           $rootScope.markers.push(tempMarker);
                    }
                })
                    .error(function (error) {
@@ -102,9 +104,11 @@ angular.module('easinApp')
            $rootScope.selectedMarker = args.leafletEvent.target.options;
             $scope.center.lat = $scope.selectedMarker.lat;
             $scope.center.lng = $scope.selectedMarker.lng;
-            $scope.center.zoom = 6;
-            $scope.close = false;
-           console.log($scope.close);
+            if($scope.center.zoom <= 6){
+              $scope.center.zoom = 6;
+            }
+           
+           $scope.close = false;
          });
            
            //Check if selectedMarker is empty and whether admin is loggen in
@@ -210,18 +214,34 @@ function editController($scope, $rootScope, API, $mdDialog, $route) {
 };
     
         API.updateReport($scope.selectedMarker.id, $scope.updatedData)
-                   .success(function (response) {
-            console.log($scope.updatedData);
-                    $mdDialog.hide();
-                   //$route.reload();
-                })
-                   .error(function (error) {
-                  console.log($error);
-                   $mdDialog.hide();
-           // $route.reload();
-                });
-    };
-  };
+    .success(function (response) {
+        $mdDialog.hide();
+
+        //Update Marker Icon
+        for (var i = 0; i < $rootScope.markers.length; i++) {
+            if ($rootScope.markers[i].id == $scope.selectedMarker.id) {
+                if ($scope.selectedMarker.status == "Submitted") {
+                    $rootScope.markers[i].icon = $rootScope.icons.submitted;
+                } else if ($scope.selectedMarker.status == "Prevalidated") {
+                    $rootScope.markers[i].icon = $rootScope.icons.prevalid;
+                } else if ($scope.selectedMarker.status == "Validated") {
+                    $rootScope.markers[i].icon = $rootScope.icons.valid;
+                } else {
+                    $rootScope.markers[i].icon = $rootScope.icons.missing;
+                }
+            }
+        }
+            
+    })
+    .error(function (error) {
+        console.log($error);
+        $mdDialog.hide();
+        // $route.reload();
+    });
+};
+
+
+};
 
 
 function removeController($scope, $rootScope, API, $mdDialog,$route) {

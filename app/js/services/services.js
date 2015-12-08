@@ -2,7 +2,7 @@
 
 // Change the value of 'Server' to the proper path to the server part, so that it would point to the all available reports
 angular.module('easinApp')
-.value('Server', 'http://46.101.195.50:8080/reports')
+.value('Server', 'http://127.0.0.1:8080/reports')
 
   .factory('API', ['$http','Server', function ($http,Server) {
       
